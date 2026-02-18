@@ -7,6 +7,15 @@ Esta guía proporciona instrucciones detalladas para levantar un entorno de labo
 
   
 
+### 📋 Requisitos Previos Recomendados
+
+| Herramienta | Obligatoria | Descripción |
+| :--- | :---: | :--- |
+| [Node.js](https://nodejs.org/) | si | Necesario para ejecutar el proyecto Hydrogen |
+| [Python 3.11](https://www.python.org/) | si | Requerido para instalar y ejecutar Wapiti |
+| [Live Server (VS Code)](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) | no | Opcional | Extensión de VS Code para servir archivos estáticos fácilmente. Útil para visualizar reportes HTML generados por Wapiti |
+
+  
 
 ---
 ##  Parte 1: Instalación de Wapiti (Escáner DAST)
@@ -97,7 +106,33 @@ Desplegaremos una tienda de demostración basada en Hydrogen (React) para usarla
 
   
 
-### 1. Preparación del Directorio
+###  Repositorio Modificado (Recomendado)
+
+El proyecto base de Shopify Hydrogen **no incluye vulnerabilidades intencionales** y puede no funcionar correctamente para las pruebas DAST de este laboratorio. Por ello, se preparó un repositorio con las **modificaciones necesarias** (middleware de vulnerabilidades, rutas expuestas, etc.) para que el escáner pueda detectar los fallos de seguridad.
+
+> [!IMPORTANT]
+> **Se recomienda clonar este repositorio en lugar de crear el proyecto desde cero.** Contiene todas las configuraciones y vulnerabilidades intencionales listas para ser escaneadas.
+
+```powershell
+git clone https://github.com/irvingaldahirangelesromero/hydrogen-storefront.git
+cd hydrogen-storefront
+npm install
+npm run dev
+```
+
+**Éxito:** Tu tienda debería estar corriendo en `http://localhost:3000`.
+
+  
+
+---
+
+### Opción Alternativa: Crear el Proyecto desde Cero
+
+Si prefieres configurar el entorno manualmente, sigue los pasos a continuación. Ten en cuenta que necesitarás agregar las vulnerabilidades y el middleware por tu cuenta.
+
+  
+
+#### 1. Preparación del Directorio
 
 ```powershell
 
@@ -109,7 +144,7 @@ cd shopify-hydrogen-DAST-lab
 
   
 
-### 2. Crear Proyecto Hydrogen
+#### 2. Crear Proyecto Hydrogen
 
 ```powershell
 
@@ -127,7 +162,7 @@ npm create @shopify/hydrogen@latest
 
   
 
-### 3. Ajuste de Dependencias (Solución de errores comunes)
+#### 3. Ajuste de Dependencias (Solución de errores comunes)
 
 Algunas versiones recientes pueden tener conflictos. Aseguramos estabilidad instalando versiones específicas de `react-router`.
 
@@ -143,7 +178,7 @@ npm install react-router@7.9.2 react-router-dom@7.9.2  @react-router/dev@7.9.2  
 
   
 
-### 4. Lanzar el Servidor
+#### 4. Lanzar el Servidor
 
 ```powershell
 
